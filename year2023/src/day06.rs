@@ -28,9 +28,9 @@ fn parser_part1(input: &str) -> Vec<Race> {
 }
 
 fn parser_part2_line(line: &str) -> Int {
-    line.chars()
-        .filter(|c| c.is_digit(10))
-        .fold(0, |acc, c| (acc * 10) + c.to_digit(10).unwrap() as Int)
+    line.chars().filter(|c| c.is_digit(10)).fold(0, |acc, c| {
+        acc.checked_mul(10).unwrap() + c.to_digit(10).unwrap() as Int
+    })
 }
 
 #[aoc_generator(day6, part2)]
@@ -46,7 +46,7 @@ fn dist(time: Int, hold: Int) -> Int {
     (time - hold) * hold
 }
 
-#[aoc(day6, part1)]
+#[aoc(day6, part1, iterative)]
 fn solver_part1(data: &[Race]) -> Int {
     return data
         .iter()
@@ -61,10 +61,10 @@ fn solver_part1(data: &[Race]) -> Int {
         .unwrap();
 }
 
-#[aoc(day6, part2)]
+#[aoc(day6, part2, iterative)]
 fn solver_part2(race: &Race) -> Int {
     let mut first: Option<Int> = Option::None;
-    let mut last: Option<Int>  = Option::None;
+    let mut last: Option<Int> = Option::None;
     for i in 1..race.time {
         let b = dist(race.time, i) > race.distance;
         if b {
@@ -81,6 +81,22 @@ fn solver_part2(race: &Race) -> Int {
     }
 
     return last.unwrap() - first.unwrap() + 1;
+}
+
+fn conv(int: i64) -> f64 {
+    let a = (int >> 32) as u32;
+    let b = int as u32;
+    return f64::from(a).mul_add(2.0_f64.powi(32), f64::from(b));
+}
+
+#[aoc(day6, part2, analytical)]
+fn solver_part2_ana(race: &Race) -> Int {
+    let a: f64 = conv(race.time);
+    let b: f64 = conv(race.distance);
+    let sqrt_res = b.mul_add(-4.0, a.powi(2)).sqrt();
+    let f = 0.5 * (a - sqrt_res);
+    let s = 0.5 * (sqrt_res + a);
+    return (s.ceil() as Int) - (f.floor() as Int) - 1;
 }
 
 #[cfg(test)]
@@ -109,5 +125,10 @@ mod tests {
     #[test]
     fn test_solver_part2() {
         assert_eq!(71503, solver_part2(&parser_part2(EXAMPLE_1)));
+    }
+
+    #[test]
+    fn test_solver_part2_ana() {
+        assert_eq!(71503, solver_part2_ana(&parser_part2(EXAMPLE_1)));
     }
 }
