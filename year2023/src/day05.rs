@@ -38,6 +38,8 @@ mod partial_fn {
     }
 }
 
+use std::ops::Range;
+
 use partial_fn::{FunctionPart, PartialFunction};
 
 #[derive(Debug)]
@@ -92,11 +94,41 @@ fn part1(almanac: &Almanac) -> Int {
     return result.unwrap();
 }
 
-#[aoc(day5, part2)]
-fn part2(_almanac: &Almanac) -> Int {
-    unimplemented!();
-}
+#[cfg(feature = "bruteforce")]
+#[aoc(day5, part2, bruteforce)]
+fn part2(almanac: &Almanac) -> Int {
+    let seed_ranges: Vec<Range<Int>> = almanac
+        .seed_data
+        .chunks(2)
+        .map(|x| (x[0], x[1]))
+        .map(|(start, len)| (start..(start + len)))
+        .collect();
 
+    let mut handles = vec![];
+
+    for range in seed_ranges {
+        let mappings = almanac.mappings.clone();
+        let handle = std::thread::spawn(move || {
+            let mut low: Option<Int> = None;
+            for seed in range {
+                let res = mappings.iter().fold(seed, |l, b| b.apply(l));
+                if !low.is_some_and(|v| v < res) {
+                    low = Some(res);
+                }
+            }
+            return low.unwrap_or(Int::MAX);
+        });
+        handles.push(handle);
+    }
+
+    let mut results = vec![];
+
+    for handle in handles {
+        results.push(handle.join().unwrap());
+    }
+
+    return *results.iter().min().unwrap();
+}
 
 #[cfg(test)]
 mod tests {
@@ -115,6 +147,7 @@ mod tests {
         assert_eq!(35, part1(&parse(EXAMPLE_1)));
     }
 
+    #[cfg(feature = "bruteforce")]
     #[test]
     fn test_part2() {
         assert_eq!(46, part2(&parse(EXAMPLE_1)));

@@ -2,8 +2,8 @@
 # Advent-of-Code
 
 [![Advent of Code](https://img.shields.io/badge/🎄%20Advent%20of%20Code-2023-green)](https://adventofcode.com/about)
-[![Days completed: 5](https://img.shields.io/badge/📅%20Days%20completed-5-9cf)](https://adventofcode.com/)
-[![Stars collected: 11](https://img.shields.io/badge/Stars%20collected-11-yellow?logo=adventofcode)](https://adventofcode.com/stats)
+[![Days completed: 6](https://img.shields.io/badge/📅%20Days%20completed-6-9cf)](https://adventofcode.com/)
+[![Stars collected: 12](https://img.shields.io/badge/Stars%20collected-12-yellow?logo=adventofcode)](https://adventofcode.com/stats)
 [![Rust used in 2023](https://img.shields.io/badge/used-2023-white?logo=rust)](https://www.rust-lang.org/)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen)](https://www.mozilla.org/en-US/MPL/2.0/)
 
@@ -22,7 +22,7 @@
 
 |                     Fri                     |                     Sat                     |                     Sun                     |                     Mon                     |                    Tue                    |                     Wed                     | Thu |
 | :-----------------------------------------: | :-----------------------------------------: | :-----------------------------------------: | :-----------------------------------------: | :---------------------------------------: | :-----------------------------------------: | :-: |
-| [01](./year2023/src/day01.rs) <br> **\*\*** | [02](./year2023/src/day02.rs) <br> **\*\*** | [03](./year2023/src/day03.rs) <br> **\*\*** | [04](./year2023/src/day04.rs) <br> **\*\*** | [05](./year2023/src/day05.rs) <br> **\*** | [06](./year2023/src/day06.rs) <br> **\*\*** | 07  |
+| [01](./year2023/src/day01.rs) <br> **\*\*** | [02](./year2023/src/day02.rs) <br> **\*\*** | [03](./year2023/src/day03.rs) <br> **\*\*** | [04](./year2023/src/day04.rs) <br> **\*\*** | [05](./year2023/src/day05.rs) <br> **\*\*** | [06](./year2023/src/day06.rs) <br> **\*\*** | 07  |
 |                     08                      |                     09                      |                     10                      |                     11                      |                    12                     |                     13                      | 14  |
 |                     15                      |                     16                      |                     17                      |                     18                      |                    19                     |                     20                      | 21  |
 |                     22                      |                     23                      |                     24                      |                     25                      |                                           |                                             |     |
