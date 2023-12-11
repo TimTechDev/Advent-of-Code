@@ -68,10 +68,10 @@ cargo test
 
 - official [Advent of Code](https://adventofcode.com/2021/about) about page
 - [Awesome Advent of Code](https://github.com/Bogdanp/awesome-advent-of-code)
-- My (old) [2022 repo](https://github.com/TimTechDev/Advent-of-Code-2022)
-- My (old) [2021 repo](https://github.com/TimTechDev/Advent-of-Code-2021)
+- My old [2022 repo](https://github.com/TimTechDev/Advent-of-Code-2022)
+- My old [2021 repo](https://github.com/TimTechDev/Advent-of-Code-2021)
 - You may also check out [other](https://github.com/search?q=advent+of+code) solutions
 
 ## License
 
-Licensed under Mozilla Public License, Version 2.0 [local](./LICENSE) or [web](https://www.mozilla.org/en-US/MPL/2.0/)
+Licensed under Mozilla Public License, Version 2.0 (read it here: [local](./LICENSE) or [web](https://www.mozilla.org/en-US/MPL/2.0/))
