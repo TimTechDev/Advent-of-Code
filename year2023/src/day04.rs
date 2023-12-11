@@ -29,9 +29,9 @@ fn parse(input: &str) -> Vec<Card> {
 fn part1_score(count: usize) -> usize {
     if count == 0 {
         return 0;
-    } else {
-        return 1 << (count - 1);
     }
+
+    return 1 << (count - 1);
 }
 
 #[aoc(day4, part1)]
@@ -52,29 +52,24 @@ fn part1(cards: &[Card]) -> usize {
 #[aoc(day4, part2)]
 fn part2(cards: &[Card]) -> usize {
     let mut amounts: Vec<usize> = cards.iter().map(|_| 1_usize).collect();
-    let mut position: usize = 0;
-
-    for card in cards {
+    for (position, card) in cards.iter().enumerate() {
         let count = card
             .drawn
             .iter()
             .filter(|d| card.winning.contains(*d))
             .count();
-        let amount = amounts.get(position).unwrap_or(&0).clone();
+        let amount = *amounts.get(position).unwrap_or(&0);
 
         // println!("card: {} amount: {} count: {}", position + 1, amount, count);
 
         if count == 0 {
-            position += 1;
             continue;
         }
 
-        for pos in (position + 1)..=(position + count) {
-            amounts[pos] = amounts[pos] + amount;
+        for item in amounts.iter_mut().take(position + count + 1).skip(position + 1) {
+            *item += amount;
         }
         // println!("amounts: {:?}", amounts);
-
-        position += 1;
     }
 
     return amounts.iter().sum();

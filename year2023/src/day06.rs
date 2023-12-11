@@ -9,18 +9,18 @@ struct Race {
 
 fn parser_part1_line(line: &str) -> impl Iterator<Item = Int> + '_ {
     return line
-        .split_once(":")
+        .split_once(':')
         .unwrap()
         .1
         .trim()
         .split_ascii_whitespace()
-        .map(|s| s.parse::<Int>())
+        .map(str::parse)
         .map(Result::unwrap);
 }
 
 #[aoc_generator(day6, part1)]
 fn parser_part1(input: &str) -> Vec<Race> {
-    let (times, distances) = input.split_once("\n").unwrap();
+    let (times, distances) = input.split_once('\n').unwrap();
     return parser_part1_line(times)
         .zip(parser_part1_line(distances))
         .map(|(time, distance)| Race { time, distance })
@@ -28,14 +28,14 @@ fn parser_part1(input: &str) -> Vec<Race> {
 }
 
 fn parser_part2_line(line: &str) -> Int {
-    line.chars().filter(|c| c.is_digit(10)).fold(0, |acc, c| {
-        acc.checked_mul(10).unwrap() + c.to_digit(10).unwrap() as Int
+    line.chars().filter(char::is_ascii_digit).fold(0, |acc, c| {
+        acc.checked_mul(10).unwrap() + Int::from(c.to_digit(10).unwrap())
     })
 }
 
 #[aoc_generator(day6, part2)]
 fn parser_part2(input: &str) -> Race {
-    let (t, d) = input.split_once("\n").unwrap();
+    let (t, d) = input.split_once('\n').unwrap();
     return Race {
         time: parser_part2_line(t),
         distance: parser_part2_line(d),

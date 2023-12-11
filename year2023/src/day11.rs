@@ -8,7 +8,7 @@ fn parser(input: &str) -> ParsedInput {
     for (ln, line) in input.lines().enumerate() {
         for (col, c) in line.chars().enumerate() {
             if c == '#' {
-                pairs.push((ln, col))
+                pairs.push((ln, col));
             }
         }
     }
@@ -16,24 +16,24 @@ fn parser(input: &str) -> ParsedInput {
 }
 
 fn expanding_space(pairs: &ParsedInput) -> Vec<(usize, usize, usize, usize)> {
-    let ln_set: HashSet<usize> = HashSet::from_iter(pairs.iter().map(|&x| x.0));
-    let col_set: HashSet<usize> = HashSet::from_iter(pairs.iter().map(|&x| x.1));
+    let ln_set = pairs.iter().map(|&x| x.0).collect::<HashSet<usize>>();
+    let col_set = pairs.iter().map(|&x| x.1).collect::<HashSet<usize>>();
 
     let max_ln = *ln_set.iter().max().unwrap_or(&0);
     let max_col = *col_set.iter().max().unwrap_or(&0);
 
-    let mut expanding_lns: Vec<usize> = HashSet::from_iter(0..max_ln)
+    let mut expanding_lns: Vec<usize> = (0..max_ln).collect::<HashSet<usize>>()
         .difference(&ln_set)
-        .map(|&x| x)
+        .copied()
         .collect();
     
-    let mut expanding_cols: Vec<usize> = HashSet::from_iter(0..max_col)
+    let mut expanding_cols: Vec<usize> = (0..max_col).collect::<HashSet<usize>>()
         .difference(&col_set)
-        .map(|&x| x)
+        .copied()
         .collect();
 
-    expanding_lns.sort();
-    expanding_cols.sort();
+    expanding_lns.sort_unstable();
+    expanding_cols.sort_unstable();
 
     let mut result: Vec<(usize, usize, usize, usize)> = Vec::new();
 
@@ -45,7 +45,7 @@ fn expanding_space(pairs: &ParsedInput) -> Vec<(usize, usize, usize, usize)> {
     return result;
 }
 
-fn distances(pairs: &Vec<(usize, usize, usize, usize)>, scalar: usize) -> usize {
+fn distances(pairs: &[(usize, usize, usize, usize)], scalar: usize) -> usize {
     if scalar == 0 {
         panic!("At the disco!")
     }
@@ -76,7 +76,7 @@ fn solver_part1(pairs: &ParsedInput) -> usize {
 
 #[aoc(day11, part2)]
 fn solver_part2(pairs: &ParsedInput) -> usize {
-    return distances(&expanding_space(pairs), 1000000);
+    return distances(&expanding_space(pairs), 1_000_000);
 }
 
 #[cfg(test)]

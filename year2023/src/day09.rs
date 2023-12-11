@@ -6,35 +6,35 @@ fn parse(input: &str) -> Vec<Vec<Int>> {
         .lines()
         .map(|line| {
             line.split_whitespace()
-                .map(|s| s.parse::<Int>())
+                .map(str::parse)
                 .map(Result::unwrap)
                 .collect::<Vec<Int>>()
         })
         .collect()
 }
 
-fn extrapolate_forwards(v: &Vec<Int>) -> Int {
+fn extrapolate_forwards(v: &[Int]) -> Int {
     let mut last: Vec<Int> = Vec::new();
-    let mut temp = v.clone();
-    while (&temp).iter().any(|&x| x != 0) {
+    let mut temp = v.to_owned();
+    while temp.iter().any(|&x| x != 0) {
         last.push(*temp.last().unwrap());
         temp = temp.windows(2).map(|a| a[1] - a[0]).collect::<Vec<Int>>();
     }
     last.reverse();
-    // println!("{:?}", last);
-    return last.iter().map(|&x| x).reduce(|acc, x| acc + x).unwrap();
+    println!("{:?}", last);
+    return last.iter().copied().reduce(|acc, x| acc + x).unwrap();
 }
 
-fn extrapolate_backwards(v: &Vec<Int>) -> Int {
+fn extrapolate_backwards(v: &[Int]) -> Int {
     let mut first: Vec<Int> = Vec::new();
-    let mut temp = v.clone();
-    while (&temp).iter().any(|&x| x != 0) {
+    let mut temp = v.to_owned();
+    while temp.iter().any(|&x| x != 0) {
         first.push(*temp.first().unwrap());
         temp = temp.windows(2).map(|a| a[1] - a[0]).collect::<Vec<Int>>();
     }
     first.reverse();
-    // println!("{:?}", first);
-    return first.iter().map(|&x| x).reduce(|acc, x| x - acc).unwrap();
+    println!("{:?}", first);
+    return first.iter().copied().reduce(|acc, x| x - acc).unwrap();
 }
 
 #[aoc(day9, part1)]

@@ -21,11 +21,10 @@ struct Schematic {
 
 #[aoc_generator(day3)]
 fn parse(input: &str) -> Schematic {
-    let mut line: usize = 0;
     let mut numbers: Vec<Number> = Vec::new();
     let mut symbols: Vec<Symbol> = Vec::new();
 
-    for ln in input.lines() {
+    for (line, ln) in input.lines().enumerate() {
         let mut column: usize = 0;
 
         let mut buffer: usize = 0;
@@ -44,7 +43,7 @@ fn parse(input: &str) -> Schematic {
                         buffer = 0;
                     }
                 }
-                x if x.is_digit(10) => {
+                x if x.is_ascii_digit() => {
                     if buffer == 0 {
                         start = column;
                         buffer = x.to_digit(10).unwrap() as usize;
@@ -79,7 +78,6 @@ fn parse(input: &str) -> Schematic {
                 value: buffer,
             });
         }
-        line += 1;
     }
     // println!("|n| = {:?}  |s| = {:?}", numbers.len(), symbols.len());
     return Schematic { numbers, symbols };
@@ -125,7 +123,7 @@ fn part2(schematic: &Schematic) -> usize {
                 .collect();
 
             if numbers.len() != 2 {
-                return 0 as usize;
+                return 0;
             }
 
             return numbers[0].value * numbers[1].value; // TODO

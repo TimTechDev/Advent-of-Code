@@ -82,9 +82,9 @@ pub fn parser(input: &str) -> (Vec<Instruction>, Network) {
         let lparts = line.split_once('=').unwrap();
         let key = lparts.0.trim();
         let values = lparts.1.split_once(',').unwrap();
-        let v1 = values.0.trim().strip_prefix("(").unwrap();
-        let v2 = values.1.trim().strip_suffix(")").unwrap();
-        network.insert(key.into(), (v1.into(), v2.into()));
+        let v1 = values.0.trim().strip_prefix('(').unwrap();
+        let v2 = values.1.trim().strip_suffix(')').unwrap();
+        network.insert(key, (v1, v2));
     }
     return (instructions, network);
 }
@@ -115,7 +115,7 @@ pub fn solver_part2((instr, network): &(Vec<Instruction>, Network)) -> u64 {
         .inner
         .keys()
         .filter(|&x| (x % 26) == 0)
-        .map(|&x| x)
+        .copied()
         .collect();
     let mut cycles: Vec<u64> = vec![];
 
@@ -141,7 +141,7 @@ pub fn solver_part2((instr, network): &(Vec<Instruction>, Network)) -> u64 {
 
     return cycles
         .iter()
-        .map(|&x| x)
+        .copied()
         .reduce(|a, b| lcm(0, a, b))
         .unwrap();
 }

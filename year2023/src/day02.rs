@@ -14,25 +14,25 @@ fn parse_cubes(input: &str) -> Draw {
     let mut green: usize = 0;
     let mut blue: usize = 0;
 
-    input.split(",").for_each(|s| {
+    input.split(',').for_each(|s| {
         if s.contains("red") {
-            red = s.strip_suffix("red").unwrap().trim().parse().unwrap_or(0)
+            red = s.strip_suffix("red").unwrap().trim().parse().unwrap_or(0);
         }
         if s.contains("green") {
-            green = s.strip_suffix("green").unwrap().trim().parse().unwrap_or(0)
+            green = s.strip_suffix("green").unwrap().trim().parse().unwrap_or(0);
         }
         if s.contains("blue") {
-            blue = s.strip_suffix("blue").unwrap().trim().parse().unwrap_or(0)
+            blue = s.strip_suffix("blue").unwrap().trim().parse().unwrap_or(0);
         }
     });
     return Draw { red, green, blue };
 }
 
 fn parse_line(input: &str) -> Game {
-    let (a, b) = input.split_once(":").unwrap();
+    let (a, b) = input.split_once(':').unwrap();
     return Game {
         id: a.strip_prefix("Game ").unwrap().parse::<usize>().unwrap(),
-        draws: b.split(";").map(parse_cubes).collect::<Vec<Draw>>(),
+        draws: b.split(';').map(parse_cubes).collect::<Vec<Draw>>(),
     };
 }
 

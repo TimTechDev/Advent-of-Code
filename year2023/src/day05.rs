@@ -58,7 +58,7 @@ fn parse_block(input: &str) -> PartialFunction {
                 let n: Vec<Int> = line
                     .trim()
                     .split_ascii_whitespace()
-                    .map(|s| s.parse::<Int>())
+                    .map(str::parse)
                     .map(Result::unwrap)
                     .collect();
                 return FunctionPart::new(n[1], n[0], n[2]);
@@ -75,7 +75,7 @@ fn parse(input: &str) -> Almanac {
         .0
         .split_ascii_whitespace()
         .skip(1)
-        .map(|s| s.parse::<Int>())
+        .map(str::parse)
         .map(Result::unwrap)
         .collect();
     let mappings = input.split("\n\n").skip(1).map(parse_block).collect();

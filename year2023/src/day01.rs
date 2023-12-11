@@ -4,9 +4,7 @@ pub fn solve_part1(input: &str) -> u32 {
         .lines()
         .map(|line| {
             line.chars()
-                .map(|c| c.to_digit(10))
-                .filter(Option::is_some)
-                .map(Option::unwrap)
+                .filter_map(|c| c.to_digit(10))
                 .fold(0, |acc, n| (if acc == 0 { n } else { acc / 10 }) * 10 + n)
         })
         .sum();
@@ -21,9 +19,9 @@ fn solve_part2(input: &str) -> usize {
                 .chars()
                 .collect::<Vec<char>>()
                 .windows(5)
-                .map(|c| match c {
+                .filter_map(|c| match c {
                     d if d[4] == '0' => None,
-                    d if d[4].is_digit(10) => d[4].to_digit(10),
+                    d if d[4].is_ascii_digit() => d[4].to_digit(10),
                     d if d[2..5] == ['o', 'n', 'e'] => Some(1),
                     d if d[2..5] == ['t', 'w', 'o'] => Some(2),
                     d if d[2..5] == ['s', 'i', 'x'] => Some(6),
@@ -35,8 +33,6 @@ fn solve_part2(input: &str) -> usize {
                     d if d == ['e', 'i', 'g', 'h', 't'] => Some(8),
                     _ => None,
                 })
-                .filter(Option::is_some)
-                .map(Option::unwrap)
                 .fold(0, |acc, n| (if acc == 0 { n } else { acc / 10 }) * 10 + n)
         })
         .map(|x| x as usize)
