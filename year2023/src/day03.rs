@@ -79,7 +79,6 @@ fn parse(input: &str) -> Schematic {
             });
         }
     }
-    // println!("|n| = {:?}  |s| = {:?}", numbers.len(), symbols.len());
     return Schematic { numbers, symbols };
 }
 
@@ -126,7 +125,7 @@ fn part2(schematic: &Schematic) -> usize {
                 return 0;
             }
 
-            return numbers[0].value * numbers[1].value; // TODO
+            return numbers[0].value * numbers[1].value;
         })
         .sum();
 

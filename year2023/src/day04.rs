@@ -60,8 +60,6 @@ fn part2(cards: &[Card]) -> usize {
             .count();
         let amount = *amounts.get(position).unwrap_or(&0);
 
-        // println!("card: {} amount: {} count: {}", position + 1, amount, count);
-
         if count == 0 {
             continue;
         }
@@ -73,7 +71,6 @@ fn part2(cards: &[Card]) -> usize {
         {
             *item += amount;
         }
-        // println!("amounts: {:?}", amounts);
     }
 
     return amounts.iter().sum();

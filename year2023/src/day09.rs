@@ -21,7 +21,6 @@ fn extrapolate_forwards(v: &[Int]) -> Int {
         temp = temp.windows(2).map(|a| a[1] - a[0]).collect::<Vec<Int>>();
     }
     last.reverse();
-    println!("{:?}", last);
     return last.iter().copied().reduce(|acc, x| acc + x).unwrap();
 }
 
@@ -33,7 +32,6 @@ fn extrapolate_backwards(v: &[Int]) -> Int {
         temp = temp.windows(2).map(|a| a[1] - a[0]).collect::<Vec<Int>>();
     }
     first.reverse();
-    println!("{:?}", first);
     return first.iter().copied().reduce(|acc, x| x - acc).unwrap();
 }
 

@@ -119,8 +119,6 @@ pub fn solver_part2((instr, network): &(Vec<Instruction>, Network)) -> u64 {
         .collect();
     let mut cycles: Vec<u64> = vec![];
 
-    println!("|nodes| = {}", nodes.len());
-
     for node in nodes {
         let mut current_key = node;
         let mut cycle = 0;
@@ -136,8 +134,6 @@ pub fn solver_part2((instr, network): &(Vec<Instruction>, Network)) -> u64 {
         }
         cycles.push(cycle);
     }
-
-    println!("cycle lengths: {:?}", cycles);
 
     return cycles.iter().copied().reduce(|a, b| lcm(0, a, b)).unwrap();
 }
