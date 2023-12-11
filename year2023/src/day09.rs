@@ -62,9 +62,9 @@ mod tests {
 
     #[test]
     fn test_extrapolate_backwards() {
-        assert_eq!(5, extrapolate_backwards(&vec![0, 3, 6, 9, 12, 15]));
-        assert_eq!(-3, extrapolate_backwards(&vec![1, 3, 6, 10, 15, 21]));
-        assert_eq!(0, extrapolate_backwards(&vec![10, 13, 16, 21, 30, 45]));
+        assert_eq!(-3, extrapolate_backwards(&vec![0, 3, 6, 9, 12, 15]));
+        assert_eq!(0, extrapolate_backwards(&vec![1, 3, 6, 10, 15, 21]));
+        assert_eq!(5, extrapolate_backwards(&vec![10, 13, 16, 21, 30, 45]));
     }
 
     #[test]
