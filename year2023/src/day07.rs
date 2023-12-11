@@ -4,8 +4,20 @@ fn type_helper(first: u8, second: u8) -> u8 {
     return match first {
         5 => 6,
         4 => 5,
-        3 => (if second == 2 { 4 } else { 3 }),
-        2 => (if second == 2 { 2 } else { 1 }),
+        3 => {
+            if second == 2 {
+                4
+            } else {
+                3
+            }
+        }
+        2 => {
+            if second == 2 {
+                2
+            } else {
+                1
+            }
+        }
         1 => 0,
         _ => unreachable!(),
     };
@@ -191,7 +203,6 @@ where
         })
         .collect();
 }
-
 
 #[aoc_generator(day7, part1)]
 fn parser_part1(input: &str) -> Vec<Hand<part1::Card>> {

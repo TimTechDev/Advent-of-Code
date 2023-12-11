@@ -1,6 +1,6 @@
 use std::{
     collections::HashMap,
-    ops::{Div, Mul, Rem, Sub},
+    ops::{Div, Mul, Rem},
 };
 
 pub struct Network {

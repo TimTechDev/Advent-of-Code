@@ -38,6 +38,7 @@ mod partial_fn {
     }
 }
 
+#[cfg(feature = "bruteforce")]
 use std::ops::Range;
 
 use partial_fn::{FunctionPart, PartialFunction};
