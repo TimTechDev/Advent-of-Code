@@ -66,7 +66,11 @@ fn part2(cards: &[Card]) -> usize {
             continue;
         }
 
-        for item in amounts.iter_mut().take(position + count + 1).skip(position + 1) {
+        for item in amounts
+            .iter_mut()
+            .take(position + count + 1)
+            .skip(position + 1)
+        {
             *item += amount;
         }
         // println!("amounts: {:?}", amounts);

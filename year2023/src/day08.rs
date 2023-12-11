@@ -139,11 +139,7 @@ pub fn solver_part2((instr, network): &(Vec<Instruction>, Network)) -> u64 {
 
     println!("cycle lengths: {:?}", cycles);
 
-    return cycles
-        .iter()
-        .copied()
-        .reduce(|a, b| lcm(0, a, b))
-        .unwrap();
+    return cycles.iter().copied().reduce(|a, b| lcm(0, a, b)).unwrap();
 }
 
 #[cfg(test)]
@@ -198,8 +194,16 @@ mod tests {
         });
         println!("stateDiagram-v2");
         for node in network {
-            println!("    {} --> {}", _u16_to_str(node.0), _u16_to_str((node.1).0));
-            println!("    {} --> {}", _u16_to_str(node.0), _u16_to_str((node.1).1));
+            println!(
+                "    {} --> {}",
+                _u16_to_str(node.0),
+                _u16_to_str((node.1).0)
+            );
+            println!(
+                "    {} --> {}",
+                _u16_to_str(node.0),
+                _u16_to_str((node.1).1)
+            );
         }
     }
 }

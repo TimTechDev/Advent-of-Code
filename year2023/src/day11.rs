@@ -22,12 +22,14 @@ fn expanding_space(pairs: &ParsedInput) -> Vec<(usize, usize, usize, usize)> {
     let max_ln = *ln_set.iter().max().unwrap_or(&0);
     let max_col = *col_set.iter().max().unwrap_or(&0);
 
-    let mut expanding_lns: Vec<usize> = (0..max_ln).collect::<HashSet<usize>>()
+    let mut expanding_lns: Vec<usize> = (0..max_ln)
+        .collect::<HashSet<usize>>()
         .difference(&ln_set)
         .copied()
         .collect();
-    
-    let mut expanding_cols: Vec<usize> = (0..max_col).collect::<HashSet<usize>>()
+
+    let mut expanding_cols: Vec<usize> = (0..max_col)
+        .collect::<HashSet<usize>>()
         .difference(&col_set)
         .copied()
         .collect();
